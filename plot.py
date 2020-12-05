@@ -34,7 +34,7 @@ def load(region):
 	df['data'] = df.data.map(to_datetime)
 	return df.sort_values('data')
 
-def plot(region):
+def plot_(region):
 	
 	df = load(region)
 
@@ -222,13 +222,18 @@ def plot(region):
 	
 	pp.close()
 	plt.close('all')
+
+	os.system(f'pdf2svg "plots/{region.lower()}.pdf" "images/{region.lower()}/{region.lower()}%d.svg" all')
 	
 	return
 
 with open('regions.txt', 'r') as f:
 	REGIONS = eval(f.read())
 
-if __name__ == "__main__":
+def plot():
 	for region in REGIONS:
-		plot(region)
-		os.system(f'pdf2svg "plots/{region.lower()}.pdf" "images/{region.lower()}/{region.lower()}%d.svg" all')
+		plot_(region)
+	return
+
+if __name__ == "__main__":
+	plot()
