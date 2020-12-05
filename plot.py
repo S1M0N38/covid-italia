@@ -27,11 +27,16 @@ def g_prime(t, alpha, Ninf, t0):
 def l_prime(t, alpha, Ninf, t0):
 	return logistic(t, alpha, Ninf, t0) * alpha * (1 - logistic(t, alpha, Ninf, t0) / Ninf)
 
-def plot(region):
-	
-	df = pd.read_csv(f'data/{region.lower()}.csv')
+def load(region):
+	# load data for region
+	df = pd.read_csv(f'data/{region.lower()}/{region.lower()}.csv')
 	to_datetime = lambda x: dt.datetime.strptime(x, "%Y-%m-%d %H:%M:%S")
 	df['data'] = df.data.map(to_datetime)
+	return df.sort_values('data')
+
+def plot(region):
+	
+	df = load(region)
 
 	global N0 
 	N0 = df.totale_casi.values[0]
@@ -139,7 +144,7 @@ def plot(region):
 	ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.0f%%'))
 
 	color = 'tab:red'
-	ax2.set_ylabel('Rapporto Positivi/Tamponi', color=color, fontsize=16)
+	ax2.set_ylabel('Rapporto Positivi-Tamponi', color=color, fontsize=16)
 	ax2.plot(df.data, df.positivi/df.tamponi*100, '.-', color=color)
 	ax2.tick_params(axis='y', labelcolor=color)
 
@@ -218,15 +223,12 @@ def plot(region):
 	pp.close()
 	plt.close('all')
 	
-	return 
+	return
 
 with open('regions.txt', 'r') as f:
 	REGIONS = eval(f.read())
 
 if __name__ == "__main__":
-	plot('Italia')
-	os.system('pdf2svg plots/italia.pdf images/italia/italia%d.svg all')
-
 	for region in REGIONS:
 		plot(region)
 		os.system(f'pdf2svg "plots/{region.lower()}.pdf" "images/{region.lower()}/{region.lower()}%d.svg" all')

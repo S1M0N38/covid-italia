@@ -4,6 +4,21 @@ import pandas   as pd
 
 import time
 
+MONTHS = {
+	'January'   : 'Gen', 
+	'February'  : 'Feb', 
+	'March'     : 'Mar', 
+	'April'     : 'Apr', 
+	'May'       : 'Mag',
+    'June'      : 'Giu',
+    'July'      : 'Lug',
+    'August'    : 'Ago',
+	'September' : 'Set', 
+	'October'   : 'Ott', 
+	'November'  : 'Nov', 
+	'December'  : 'Dic' 
+}
+
 with open('regions.txt', 'r') as f:
 	REGIONS = eval(f.read())
 
@@ -47,37 +62,76 @@ def process(df, region):
 	df['morti'] = df.deceduti - df.deceduti.shift(1,fill_value=0)
 	df['morti'] = df.morti.map(int)
 
-	diagnostico = df.casi_da_sospetto_diagnostico - df.casi_da_sospetto_diagnostico.shift(1,fill_value=0)
-	df['diagnostico'] = diagnostico.fillna(method='ffill').fillna(0).map(int)
-
-	df['screening'] = df.casi_da_screening - df.casi_da_screening.shift(1,fill_value=0)
-	df['screening'] = df.screening.fillna(method='ffill').fillna(0).map(int)
-
 	df['tamponi'] = df.tamponi - df.tamponi.shift(1, fill_value=0)
 	df['tamponi'] = df.tamponi.map(int)
 
 	df = df.drop([0]).reset_index()
-	df = df[['data', 'totale_casi', 'positivi', 'netto_positivi', 'tamponi', 'guariti', 'totale_positivi',
-             'morti', 'sintomi', 'intensiva', 'diagnostico', 'screening', 'delta_positivi']].copy()
+	df = df[['data', 'totale_casi', 'positivi', 'netto_positivi', 'tamponi', 'guariti', 
+	         'totale_positivi', 'morti', 'sintomi', 'intensiva', 'delta_positivi']].copy()
     
 	return df
 
+def format_date(x):
+	day, month = x.split(' ')
+
+	if day[0] == '0': day = day[1]
+	month = MONTHS.get(month)
+
+	return f'{day} {month}'
+
+def to_int(x):
+	x = float(x)
+	if x - int(x) > 0:
+		return f'{str(x)} %'
+	else: return str(int(x))
+
 def today(df, region):
-	pass
+	df = df.tail(2).set_index('data')
+	df.index = df.index.map(lambda x: x.strftime('%d %B'))
+	df.index = df.index.map(format_date)
+
+	# TODO select columms and change column name, maybe color for today and for col
+	df = df[['positivi', 'netto_positivi', 'tamponi', 'morti', 'guariti', 'sintomi', 'intensiva']]
+	df['Rapporto POSITIVI-TAMPONI'] = (df.positivi/df.tamponi*100).map(lambda x: round(x, 1))
+	df = df.rename(columns={
+		'positivi'       : 'Nuovi POSITIVI',
+		'netto_positivi' : 'Incremento NETTO POSITIVI',
+		'tamponi'        : 'Incremento TAMPONI', 
+		'morti'          : 'Incremento MORTI',
+		'guariti'        : 'Incremento GUARITI',
+		'sintomi'        : 'Incremento RICOVERATI con SINTOMI',
+		'intensiva'      : 'Incremento TERAPIA INTENSIVA'})
+	df.index.rename('', inplace=True)
+
+	df = df.T
+	for column in df.columns:
+		df[column] = df[column].map(str).map(to_int)
+
+	# injecting html
+	if region == 'Italia': 
+		file_ = 'index.html'
+	else: file_ = f'website/regions/{region.lower()}.html'
+	with open(file_, 'r') as f: html = f.read()
+
+	html0 = html.split('class="flag">')[0]
+	html1 = html.split('</table>')[1]
+	html = html0 + 'class="flag">' + '\n' + df.to_html() + html1
+
+	with open(file_, 'w') as f: f.write(html)
+	return
+
 
 def update_and_save():
 
 	italia, regioni = update()
 
-	italia = process(italia, 'Italia')
-	italia.to_csv('data/italia.csv', index=False)
-	today(italia, 'Italia')
-
 	for region in REGIONS:
-		df = process(regioni, region)
-		df.to_csv(f'data/{region.lower()}.csv', index=False)
+		if region == 'Italia': df = process(italia, 'Italia')
+		else: df = process(regioni, region)
+		df.to_csv(f'data/{region.lower()}/{region.lower()}.csv', index=False)
 		today(df, region)
 
 	return
 
-update_and_save()
+if __name__ == "__main__":
+	update_and_save()

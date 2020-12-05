@@ -85,7 +85,7 @@ body {
   padding-bottom: 50px;
 }
 
-.flag-italia > img {
+.flag-region > img {
   width: 80%;
   height: 100%;
   justify-content: center;
@@ -113,4 +113,17 @@ body {
 
 .profile-content-wrapper h1 {
   color: lightseagreen;
+}
+
+.dataframe {
+  height: 100%;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+thead > tr > th {
+  text-align: center;
 }
