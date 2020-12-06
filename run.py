@@ -13,9 +13,10 @@ time.sleep(3)
 
 while True:
     now = pd.read_csv(url)
+
     if now.equals(yesterday) is not True:
         update.update_and_save()
         plot.plot()
         break
-    print('Waiting...')
+
     time.sleep(600)
