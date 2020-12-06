@@ -1,7 +1,9 @@
-import pandas as pd
 import datetime as dt
+import os
 import time
 
+import pandas as pd
+from sh import cd, git
 import update
 import plot
 
@@ -15,14 +17,17 @@ time.sleep(3)
 while True:
     now = pd.read_csv(url)
 
-    if now.equals(yesterday) is not True:
-        update.update_and_save()
-        plot.plot()
+    if now.equals(yesterday) is True:
+        #update.update_and_save()
+        #plot.plot()
 
-        os.system('cd ~/covid') # probably useless 
-        os.system('git add .')
-        os.system(f'git commit -m "{dt.datetime.now().strftime('%Y-%m-%d')}"')
-        os.system('git push')
+        now = dt.datetime.now().strftime('%M:%H %Y-%m-%d')
+        print(f'Updating at {now}')
+        git('add', '.')
+        today = dt.datetime.now().strftime('%Y-%m-%d')
+        git('commit', '-m', f'{today}')
+        git('push')
         break
 
+    print('Waiting')
     time.sleep(600)
