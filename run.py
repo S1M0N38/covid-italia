@@ -1,4 +1,5 @@
 import pandas as pd
+import datetime as dt
 import time
 
 import update
@@ -17,6 +18,11 @@ while True:
     if now.equals(yesterday) is not True:
         update.update_and_save()
         plot.plot()
+
+        os.system('cd ~/covid') # probably useless 
+        os.system('git add .')
+        os.system(f'git commit -m "{dt.datetime.now().strftime('%Y-%m-%d')}"')
+        os.system('git push')
         break
 
     time.sleep(600)
