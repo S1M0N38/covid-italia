@@ -17,14 +17,14 @@ while True:
     now = pd.read_csv(url)
 
     if now.equals(yesterday) is True:
-        #update.update_and_save()
-        #plot.plot()
+        update.update_and_save()
+        plot.plot()
 
-        now = dt.datetime.now().strftime('%M:%H %Y-%m-%d')
+        now = dt.datetime.now().strftime('%H:%M %Y-%m-%d')
         print(f'Updating at {now}')
         git('add', '.')
         today = dt.datetime.now().strftime('%Y-%m-%d')
-        git('commit', '-m', f'{today}')
+        git('commit', '-m', f'"{today}"')
         git('push')
         break
 
