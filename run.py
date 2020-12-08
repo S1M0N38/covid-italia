@@ -16,7 +16,7 @@ time.sleep(3)
 while True:
     now = pd.read_csv(url)
 
-    if now.equals(yesterday) is True:
+    if now.equals(yesterday) is not True:
         update.update_and_save()
         plot.plot()
 
