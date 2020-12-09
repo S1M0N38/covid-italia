@@ -24,7 +24,7 @@ while True:
         print(f'Updating at {now}')
         git('add', '.')
         today = dt.datetime.now().strftime('%Y-%m-%d')
-        git('commit', '-m', f'"{today}"')
+        git('commit', '-m', today)
         git('push')
         break
 
