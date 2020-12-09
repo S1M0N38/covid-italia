@@ -79,18 +79,11 @@ def format_date(x):
 
 	return f'{day} {month}'
 
-def to_int(x):
-	x = float(x)
-	if x - int(x) > 0:
-		return f'{str(x)} %'
-	else: return str(int(x))
-
 def today(df, region):
 	df = df.tail(2).set_index('data')
 	df.index = df.index.map(lambda x: x.strftime('%d %B'))
 	df.index = df.index.map(format_date)
 
-	# TODO select columms and change column name, maybe color for today and for col
 	df = df[['positivi', 'netto_positivi', 'tamponi', 'morti', 'guariti', 'sintomi', 'intensiva']]
 	df['Rapporto POSITIVI-TAMPONI'] = (df.positivi/df.tamponi*100).map(lambda x: round(x, 1))
 	df = df.rename(columns={
@@ -103,9 +96,11 @@ def today(df, region):
 		'intensiva'      : 'Incremento TERAPIA INTENSIVA'})
 	df.index.rename('', inplace=True)
 
+	df['Rapporto POSITIVI-TAMPONI'] = df['Rapporto POSITIVI-TAMPONI'].map(lambda x: f'{str(x)} %') 
+	
 	df = df.T
 	for column in df.columns:
-		df[column] = df[column].map(str).map(to_int)
+		df[column] = df[column].map(lambda x: int(x) if (type(x) is not type('covid')) else x)
 
 	# injecting html
 	if region == 'Italia': 
