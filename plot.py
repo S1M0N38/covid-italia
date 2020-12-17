@@ -35,18 +35,18 @@ def load(region):
 	return df.sort_values('data')
 
 def plot_(region):
-	
+
 	df = load(region)
 
-	global N0 
+	global N0
 	N0 = df.totale_casi.values[0]
-	
+
 	pp = PdfPages(f'plots/{region.lower()}.pdf')
-	
+
 	days = mdates.DayLocator()
 	fifteen_days = mdates.DayLocator(bymonthday=[1,15])
 	fifteen_days_fmt = mdates.DateFormatter('%d %b')
-	
+
 	X = df.index.values
 
 	X_ = np.array(range(X[-1] + 20))
@@ -55,33 +55,33 @@ def plot_(region):
 
 
 	# INCREMENTO POSITIVI
-	
+
 	Y = df.positivi.rolling(5, min_periods=0).mean().values
 	deltaY = df.delta_positivi.values
-	
-	popt_g, pcov = curve_fit(g_prime, X, Y, p0=[0.05, 1e6, 50])
+
+	popt_g, pcov = curve_fit(g_prime, X, Y, p0=[0.05, 1e6, 50], maxfev=5000)
 	perr_g = np.sqrt(np.diag(pcov))
-	
-	popt_l, pcov = curve_fit(l_prime, X, Y, p0=[0.05, 1e6, 50])
+
+	popt_l, pcov = curve_fit(l_prime, X, Y, p0=[0.05, 1e6, 50], maxfev=5000)
 	perr_l = np.sqrt(np.diag(pcov))
 
 	fig, ax = plt.subplots()
-	
+
 	ax.xaxis.set_major_locator(fifteen_days)
 	ax.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax.xaxis.set_minor_locator(days)
-	
+
 	ax.grid(True)
 	fig.autofmt_xdate()
-	
+
 	ax.errorbar(df.data, Y, fmt='.', label='dati')
 	ax.plot(data_, g_prime(X_, *popt_g), label='gompertz')
 	ax.plot(data_, l_prime(X_, *popt_l), label='logistic')
-	
+
 	ax.set_ylabel('Incremento positivi', fontsize=16)
 	plt.title('Media mobile a 5 giorni', fontsize=16)
 	plt.legend()
-	
+
 	fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
 	pp.savefig()
