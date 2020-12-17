@@ -59,11 +59,7 @@ def plot_(region):
 	Y = df.positivi.rolling(5, min_periods=0).mean().values
 	deltaY = df.delta_positivi.values
 
-	popt_g, pcov = curve_fit(g_prime, X, Y, p0=[0.05, 1e6, 50], maxfev=5000)
-	perr_g = np.sqrt(np.diag(pcov))
 
-	popt_l, pcov = curve_fit(l_prime, X, Y, p0=[0.05, 1e6, 50], maxfev=5000)
-	perr_l = np.sqrt(np.diag(pcov))
 
 	fig, ax = plt.subplots()
 
@@ -75,8 +71,20 @@ def plot_(region):
 	fig.autofmt_xdate()
 
 	ax.errorbar(df.data, Y, fmt='.', label='dati')
-	ax.plot(data_, g_prime(X_, *popt_g), label='gompertz')
-	ax.plot(data_, l_prime(X_, *popt_l), label='logistic')
+
+	try:
+		popt_g, pcov = curve_fit(g_prime, X, Y, p0=[0.05, 1e6, 50], maxfev=5000)
+		perr_g = np.sqrt(np.diag(pcov))
+		ax.plot(data_, g_prime(X_, *popt_g), label='gompertz')
+	except RuntimeError:
+		print(f'Optimal gompertz law parameters for {region}')
+
+	try:
+		popt_l, pcov = curve_fit(l_prime, X, Y, p0=[0.05, 1e6, 50], maxfev=5000)
+		perr_l = np.sqrt(np.diag(pcov))
+		ax.plot(data_, l_prime(X_, *popt_l), label='logistic')
+	except RuntimeError:
+		print(f'Optimal logistic law parameters for {region}')
 
 	ax.set_ylabel('Incremento positivi', fontsize=16)
 	plt.title('Media mobile a 5 giorni', fontsize=16)
@@ -85,16 +93,16 @@ def plot_(region):
 	fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
 	pp.savefig()
-	
+
 
 	# TOTALE POSITIVI e INCREMENTO NETTO POSITIVI
-	
+
 	fig, ax1 = plt.subplots()
-	
+
 	ax1.xaxis.set_major_locator(fifteen_days)
 	ax1.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax1.xaxis.set_minor_locator(days)
-	
+
 	ax1.grid(True)
 	fig.autofmt_xdate()
 
@@ -104,7 +112,7 @@ def plot_(region):
 	ax1.tick_params(axis='y', labelcolor=color)
 
 	ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-	
+
 	ax2.xaxis.set_major_locator(fifteen_days)
 	ax2.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax2.xaxis.set_minor_locator(days)
@@ -115,32 +123,32 @@ def plot_(region):
 	ax2.tick_params(axis='y', labelcolor=color)
 
 	fig.tight_layout()  # otherwise the right y-label is slightly clipped
-	
+
 	pp.savefig()
-	
-	
+
+
 	# TAMPONI e RAPPORTO POSITIVI TAMPONI
-	
+
 	fig, ax1 = plt.subplots()
-	
+
 	ax1.xaxis.set_major_locator(fifteen_days)
 	ax1.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax1.xaxis.set_minor_locator(days)
-	
+
 	ax1.grid(True)
 	fig.autofmt_xdate()
-	
+
 	color = 'tab:blue'
 	ax1.set_ylabel('Incremento tamponi', color=color, fontsize=16)
 	ax1.plot(df.data, df.tamponi, '.-', color=color)
 	ax1.tick_params(axis='y', labelcolor=color)
-	
+
 	ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-	
+
 	ax2.xaxis.set_major_locator(fifteen_days)
 	ax2.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax2.xaxis.set_minor_locator(days)
-	
+
 	ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.0f%%'))
 
 	color = 'tab:red'
@@ -149,21 +157,21 @@ def plot_(region):
 	ax2.tick_params(axis='y', labelcolor=color)
 
 	fig.tight_layout()  # otherwise the right y-label is slightly clipped
-	
+
 	pp.savefig()
-	
-	
+
+
 	# PRESSIONE OSPEDALIERA
-	
+
 	# sintomi = df.sintomi.rolling(5, min_periods=0).mean()
 	# intensiva = df.intensiva.rolling(5, min_periods=0).mean()
-	
+
 	fig, ax1 = plt.subplots()
-	
+
 	ax1.xaxis.set_major_locator(fifteen_days)
 	ax1.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax1.xaxis.set_minor_locator(days)
-	
+
 	ax1.grid(True)
 	fig.autofmt_xdate()
 
@@ -173,7 +181,7 @@ def plot_(region):
 	ax1.tick_params(axis='y', labelcolor=color)
 
 	ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-	
+
 	ax2.xaxis.set_major_locator(fifteen_days)
 	ax2.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax2.xaxis.set_minor_locator(days)
@@ -186,17 +194,17 @@ def plot_(region):
 	# plt.title('Media mobile a 5 giorni', fontsize=16)
 
 	fig.tight_layout() # otherwise the right y-label is slightly clipped
-	
+
 	pp.savefig()
-	
+
 	# MORTI e GUARITI
-	
+
 	fig, ax1 = plt.subplots()
-	
+
 	ax1.xaxis.set_major_locator(fifteen_days)
 	ax1.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax1.xaxis.set_minor_locator(days)
-	
+
 	ax1.grid(True)
 	fig.autofmt_xdate()
 
@@ -206,7 +214,7 @@ def plot_(region):
 	ax1.tick_params(axis='y', labelcolor=color)
 
 	ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-	
+
 	ax2.xaxis.set_major_locator(fifteen_days)
 	ax2.xaxis.set_major_formatter(fifteen_days_fmt)
 	ax2.xaxis.set_minor_locator(days)
@@ -217,14 +225,14 @@ def plot_(region):
 	ax2.tick_params(axis='y', labelcolor=color)
 
 	fig.tight_layout()  # otherwise the right y-label is slightly clipped
-	
+
 	pp.savefig()
-	
+
 	pp.close()
 	plt.close('all')
 
 	os.system(f'pdf2svg "plots/{region.lower()}.pdf" "images/{region.lower()}/{region.lower()}%d.svg" all')
-	
+
 	return
 
 with open('regions.txt', 'r') as f:
