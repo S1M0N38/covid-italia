@@ -5,18 +5,18 @@ import pandas   as pd
 import time
 
 MONTHS = {
-	'January'   : 'Gen', 
-	'February'  : 'Feb', 
-	'March'     : 'Mar', 
-	'April'     : 'Apr', 
+	'January'   : 'Gen',
+	'February'  : 'Feb',
+	'March'     : 'Mar',
+	'April'     : 'Apr',
 	'May'       : 'Mag',
     'June'      : 'Giu',
     'July'      : 'Lug',
     'August'    : 'Ago',
-	'September' : 'Set', 
-	'October'   : 'Ott', 
-	'November'  : 'Nov', 
-	'December'  : 'Dic' 
+	'September' : 'Set',
+	'October'   : 'Ott',
+	'November'  : 'Nov',
+	'December'  : 'Dic'
 }
 
 with open('regions.txt', 'r') as f:
@@ -42,7 +42,7 @@ def process(df, region):
 
 	to_datetime = lambda x: dt.datetime.strptime(x, "%Y-%m-%dT%H:%M:%S")
 	df['data'] = df.data.map(to_datetime)
-    
+
 	df.sort_values('data', inplace=True)
 	df = df[df.data > dt.datetime(2020, 9, 30)].reset_index()
 
@@ -64,11 +64,12 @@ def process(df, region):
 
 	df['tamponi'] = df.tamponi - df.tamponi.shift(1, fill_value=0)
 	df['tamponi'] = df.tamponi.map(int)
+        df['tamponi'] = df.tamponi.where(df.tamponi > 0, df.tamponi.shift(1, fill_value=0))
 
 	df = df.drop([0]).reset_index()
-	df = df[['data', 'totale_casi', 'positivi', 'netto_positivi', 'tamponi', 'guariti', 
+	df = df[['data', 'totale_casi', 'positivi', 'netto_positivi', 'tamponi', 'guariti',
 	         'totale_positivi', 'morti', 'sintomi', 'intensiva', 'delta_positivi']].copy()
-    
+
 	return df
 
 def format_date(x):
@@ -96,14 +97,14 @@ def today(df, region):
 		'intensiva'      : 'Incremento TERAPIA INTENSIVA'})
 	df.index.rename('', inplace=True)
 
-	df['Rapporto POSITIVI-TAMPONI'] = df['Rapporto POSITIVI-TAMPONI'].map(lambda x: f'{str(x)} %') 
-	
+	df['Rapporto POSITIVI-TAMPONI'] = df['Rapporto POSITIVI-TAMPONI'].map(lambda x: f'{str(x)} %')
+
 	df = df.T
 	for column in df.columns:
 		df[column] = df[column].map(lambda x: int(x) if (type(x) is not type('covid')) else x)
 
 	# injecting html
-	if region == 'Italia': 
+	if region == 'Italia':
 		file_ = 'index.html'
 	else: file_ = f'website/regions/{region.lower()}.html'
 	with open(file_, 'r') as f: html = f.read()
