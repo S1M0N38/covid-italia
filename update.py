@@ -64,7 +64,7 @@ def process(df, region):
 
 	df['tamponi'] = df.tamponi - df.tamponi.shift(1, fill_value=0)
 	df['tamponi'] = df.tamponi.map(int)
-        df['tamponi'] = df.tamponi.where(df.tamponi > 0, df.tamponi.shift(1, fill_value=0))
+	df['tamponi'] = df.tamponi.where(df.tamponi > 0, df.tamponi.shift(1, fill_value=0))
 
 	df = df.drop([0]).reset_index()
 	df = df[['data', 'totale_casi', 'positivi', 'netto_positivi', 'tamponi', 'guariti',
