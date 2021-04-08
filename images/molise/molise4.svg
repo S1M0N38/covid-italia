@@ -403,7 +403,7 @@
   <path d="M 736 436 L 742 436 L 742 512.640625 L 736 512.640625 Z M 736 436 "/>
 </clipPath>
 <clipPath id="clip93">
-  <path d="M 742 439 L 748 439 L 748 512.640625 L 742 512.640625 Z M 742 439 "/>
+  <path d="M 742 346 L 748 346 L 748 512.640625 L 742 512.640625 Z M 742 346 "/>
 </clipPath>
 <clipPath id="clip94">
   <path d="M 310 462 L 315 462 L 315 512.640625 L 310 512.640625 Z M 310 462 "/>
@@ -725,10 +725,10 @@
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 730.582031 512.640625 L 735.320312 512.640625 L 735.320312 341.320312 L 730.582031 341.320312 Z M 730.582031 512.640625 "/>
 </g>
 <g clip-path="url(#clip92)" clip-rule="nonzero">
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 736.503906 512.640625 L 741.242188 512.640625 L 741.242188 436.496094 L 736.503906 436.496094 Z M 736.503906 512.640625 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 736.503906 512.640625 L 741.242188 512.640625 L 741.242188 436.027344 L 736.503906 436.027344 Z M 736.503906 512.640625 "/>
 </g>
 <g clip-path="url(#clip93)" clip-rule="nonzero">
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 742.425781 512.640625 L 747.164062 512.640625 L 747.164062 439.171875 L 742.425781 439.171875 Z M 742.425781 512.640625 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 742.425781 512.640625 L 747.164062 512.640625 L 747.164062 346.039062 L 742.425781 346.039062 Z M 742.425781 512.640625 "/>
 </g>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 262.789062 505.089844 L 267.523438 505.089844 L 267.523438 500.371094 L 262.789062 500.371094 Z M 262.789062 505.089844 "/>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 274.628906 487.15625 L 279.367188 487.15625 L 279.367188 485.425781 L 274.628906 485.425781 Z M 274.628906 487.15625 "/>
@@ -804,8 +804,8 @@
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 718.742188 475.199219 L 723.476562 475.199219 L 723.476562 472.996094 L 718.742188 472.996094 Z M 718.742188 475.199219 "/>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 724.660156 470.007812 L 729.398438 470.007812 L 729.398438 454.433594 L 724.660156 454.433594 Z M 724.660156 470.007812 "/>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 730.582031 341.320312 L 735.320312 341.320312 L 735.320312 287.359375 L 730.582031 287.359375 Z M 730.582031 341.320312 "/>
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 736.503906 436.496094 L 741.242188 436.496094 L 741.242188 423.441406 L 736.503906 423.441406 Z M 736.503906 436.496094 "/>
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 742.425781 439.171875 L 747.164062 439.171875 L 747.164062 427.53125 L 742.425781 427.53125 Z M 742.425781 439.171875 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 736.503906 436.027344 L 741.242188 436.027344 L 741.242188 422.96875 L 736.503906 422.96875 Z M 736.503906 436.027344 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 742.425781 346.039062 L 747.164062 346.039062 L 747.164062 328.261719 L 742.425781 328.261719 Z M 742.425781 346.039062 "/>
 <g clip-path="url(#clip95)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:round;stroke:rgb(69.018555%,69.018555%,69.018555%);stroke-opacity:1;stroke-miterlimit:10;" d="M 170.414062 63.359375 L 170.414062 506.878906 " transform="matrix(1,0,0,-1,0,576)"/>
 </g>
