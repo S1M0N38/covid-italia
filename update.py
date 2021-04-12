@@ -332,7 +332,9 @@ def daily(covid_IT, covid_RG, vaccines):
         else:
             df = covid_RG[covid_RG.denominazione_regione == region].copy()
 
-        vacc_region = vaccines[vaccines.regione == region].tail(2).set_index('data')
+        vacc_region = vaccines[vaccines.regione == region].tail(3).set_index('data')
+        vacc_region.index = vacc_region.index.map(lambda x: x.strftime('%d %B'))
+        vacc_region.index = vacc_region.index.map(format_date)
 
         df = df.tail(2).set_index('data')
         df.index = df.index.map(lambda x: x.strftime('%d %B'))
@@ -341,6 +343,7 @@ def daily(covid_IT, covid_RG, vaccines):
         df = df[['gross_positivi', 'net_positivi', 'net_tamponi', 'net_morti',
                  'net_guariti', 'net_sintomi', 'net_intensiva']]
         df['Rapporto POSITIVI-TAMPONI'] = (df.gross_positivi/df.net_tamponi*100).map(lambda x: round(x, 1))
+        vacc_region = vacc_region.loc[df.index.tolist()].copy()
         df['VACCINI somministrati (di cui PRIMA DOSE)'] = format_vaccine(vacc_region.totale, vacc_region.prima_dose)
         df = df.rename(columns={
                 'gross_positivi': 'Nuovi POSITIVI',
