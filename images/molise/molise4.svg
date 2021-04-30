@@ -472,7 +472,7 @@
   <path d="M 738 376 L 743 376 L 743 512.640625 L 738 512.640625 Z M 738 376 "/>
 </clipPath>
 <clipPath id="clip115">
-  <path d="M 743 496 L 748 496 L 748 512.640625 L 743 512.640625 Z M 743 496 "/>
+  <path d="M 743 451 L 748 451 L 748 512.640625 L 743 512.640625 Z M 743 451 "/>
 </clipPath>
 <clipPath id="clip116">
   <path d="M 279 463 L 284 463 L 284 512.640625 L 279 512.640625 Z M 279 463 "/>
@@ -866,10 +866,10 @@
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 733.507812 512.640625 L 737.410156 512.640625 L 737.410156 443.039062 L 733.507812 443.039062 Z M 733.507812 512.640625 "/>
 </g>
 <g clip-path="url(#clip114)" clip-rule="nonzero">
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 738.382812 512.640625 L 742.285156 512.640625 L 742.285156 376.984375 L 738.382812 376.984375 Z M 738.382812 512.640625 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 738.382812 512.640625 L 742.285156 512.640625 L 742.285156 376.828125 L 738.382812 376.828125 Z M 738.382812 512.640625 "/>
 </g>
 <g clip-path="url(#clip115)" clip-rule="nonzero">
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 743.261719 512.640625 L 747.164062 512.640625 L 747.164062 496.898438 L 743.261719 496.898438 Z M 743.261719 512.640625 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156677%,46.665955%,70.587158%);fill-opacity:1;" d="M 743.261719 512.640625 L 747.164062 512.640625 L 747.164062 451.835938 L 743.261719 451.835938 Z M 743.261719 512.640625 "/>
 </g>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 240.867188 505.230469 L 244.769531 505.230469 L 244.769531 500.601562 L 240.867188 500.601562 Z M 240.867188 505.230469 "/>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 250.621094 487.636719 L 254.523438 487.636719 L 254.523438 485.941406 L 250.621094 485.941406 Z M 250.621094 487.636719 "/>
@@ -967,8 +967,8 @@
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 723.75 388.40625 L 727.652344 388.40625 L 727.652344 337.628906 L 723.75 337.628906 Z M 723.75 388.40625 "/>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 728.628906 442.265625 L 732.53125 442.265625 L 732.53125 268.183594 L 728.628906 268.183594 Z M 728.628906 442.265625 "/>
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 733.507812 443.039062 L 737.410156 443.039062 L 737.410156 260.003906 L 733.507812 260.003906 Z M 733.507812 443.039062 "/>
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 738.382812 376.984375 L 742.285156 376.984375 L 742.285156 173.269531 L 738.382812 173.269531 Z M 738.382812 376.984375 "/>
-<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 743.261719 496.898438 L 747.164062 496.898438 L 747.164062 362.941406 L 743.261719 362.941406 Z M 743.261719 496.898438 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 738.382812 376.828125 L 742.285156 376.828125 L 742.285156 171.417969 L 738.382812 171.417969 Z M 738.382812 376.828125 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,49.803162%,5.490112%);fill-opacity:1;" d="M 743.261719 451.835938 L 747.164062 451.835938 L 747.164062 182.992188 L 743.261719 182.992188 Z M 743.261719 451.835938 "/>
 <g clip-path="url(#clip117)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:round;stroke:rgb(69.018555%,69.018555%,69.018555%);stroke-opacity:1;stroke-miterlimit:10;" d="M 164.777344 63.359375 L 164.777344 506.878906 " transform="matrix(1,0,0,-1,0,576)"/>
 </g>
