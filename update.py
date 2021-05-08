@@ -127,10 +127,6 @@ def preprocess_data(covid_IT, covid_RG):
 
     covid_IT['net_tamponi'] = covid_IT.tot_tamponi - covid_IT.tot_tamponi.shift(1,fill_value=0)
 
-    # correct data errors with educated guess
-    covid_IT.net_tamponi = covid_IT.net_tamponi.where(covid_IT.net_tamponi < 0,
-                                          (covid_IT.net_tamponi+covid_IT.net_tamponi.shift(-1, fill_value=0))/2)
-
     covid_IT.drop([0]).reset_index(drop=True, inplace=True)
 
     # moving averages
@@ -159,9 +155,6 @@ def preprocess_data(covid_IT, covid_RG):
 
         df['net_tamponi'] = df.tot_tamponi - df.tot_tamponi.shift(1,fill_value=0)
 
-        # correct data errors with educated guess
-        df.net_tamponi = df.net_tamponi.where(df.net_tamponi < 0,
-                                              (df.net_tamponi+df.net_tamponi.shift(-1, fill_value=0))/2)
         df.drop([0]).reset_index(drop=True, inplace=True)
 
         # moving averages
