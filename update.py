@@ -92,11 +92,12 @@ def get_data():
         daily = vaccines[vaccines.data_somministrazione == date].copy()
         for region in set(vaccines.nome_area):
 
+            prima.append(daily[daily.nome_area == region]['prima_dose'].sum())
+            seconda.append(daily[daily.nome_area == region]['seconda_dose'].sum())
+
             if '/' in region: region = region.split(' / ')[0]
             if 'Provincia' in region: region = 'P.A. ' + region.split(' ')[2]
 
-            prima.append(daily[daily.nome_area == region]['prima_dose'].sum())
-            seconda.append(daily[daily.nome_area == region]['seconda_dose'].sum())
             regione.append(list(fuzzyfinder(region, REGIONS))[0])
             data.append(to_datetime(date))
 
@@ -366,3 +367,5 @@ def daily(covid_IT, covid_RG, vaccines):
         with open(file_, 'w') as f: f.write(html)
 
     return
+
+get_data()
