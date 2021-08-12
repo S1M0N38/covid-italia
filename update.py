@@ -208,6 +208,8 @@ def plot_data(covid_IT, covid_RG, vaccines):
         ax.fill_between(x, y - 3*delta_y, y + 3*delta_y, color='b', alpha=0.2)
 
         ax.grid()
+        ax.set_xticks(x)
+        ax.set_xticklabels(x, rotation=45)
         ax.set_ylabel('Incremento POSITIVI', fontsize=16)
         ax.tick_params(axis='y', labelcolor='b')
 
@@ -234,6 +236,8 @@ def plot_data(covid_IT, covid_RG, vaccines):
         ax.scatter(x, df.net_sintomi.rolling(7, min_periods=0).mean(), s=49, marker='.', color='b')
 
         ax.grid()
+        ax.set_xticks(x)
+        ax.set_xticklabels(x, rotation=45)
         ax.set_ylabel('Incremento RICOVERATI CON SINTOMI', fontsize=16)
         ax.tick_params(axis='y', labelcolor='b')
 
@@ -261,6 +265,8 @@ def plot_data(covid_IT, covid_RG, vaccines):
         ax.fill_between(x, y - 3*delta_y, y + 3*delta_y, color='b', alpha=0.2)
 
         ax.grid()
+        ax.set_xticks(x)
+        ax.set_xticklabels(x, rotation=45)
         ax.set_ylabel('Incremento POSITIVI', fontsize=16)
         ax.tick_params(axis='y', labelcolor='b')
 
